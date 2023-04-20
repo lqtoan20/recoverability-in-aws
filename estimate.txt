@@ -1,0 +1,16 @@
+Minimum RTO for a single AZ outage
+In terms of the minimum RTO for a single AZ outage, it should be possible to achieve an RTO of seconds to a few minutes (<5). 
+This is because in a multi-AZ setup, if one AZ goes down, the failover to the standby AZ can happen quickly, resulting in minimal downtime and another factor that can be considered is the size of the database
+
+Minimum RTO for a single region outage
+In the case of a single region outage, the minimum achievable RTO would depend on the distance between the primary and standby regions or network latency 
+and the time it takes to synchronize data
+
+Minimum RPO for a single AZ outage
+It should be possible to achieve an RPO of a few seconds or less, depending on the replication mechanism used. 
+This is because data is typically replicated synchronously or asynchronously to the standby AZ, ensuring that very little data is lost in the event of a failover.
+(We can use RDS:describe-db-instances:LatestRestorableTime to know the latest time to which a database can be restored with point-in-time restore.)
+
+Minimum RPO for a single region outage
+This session the same with RTO, it's mean the minimum achievable RPO would depend on the replication mechanism used and the distance between the primary and standby regions
+If asynchronous replication is used or the standby region is far away, the RPO may increase to several minutes or more, meaning that some data may be lost in the event of a failover

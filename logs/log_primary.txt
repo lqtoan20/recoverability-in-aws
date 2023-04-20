@@ -1,0 +1,114 @@
+[ec2-user@ip-10-1-11-223 ~]$ mysql -h udacity-primary-db.cgoarrai2ute.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 24
+Server version: 8.0.32 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> SHOW TABLES;
+ERROR 1046 (3D000): No database selected
+MySQL [(none)]> CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20), species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+ERROR 1046 (3D000): No database selected
+MySQL [(none)]> mysql> CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20),
+    ->        species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql> CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20),
+       species VAR' at line 1
+MySQL [(none)]> CREATE TABLE pet(name VARCHAR(20), owner VARCHAR(20), species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+ERROR 1046 (3D000): No database selected
+MySQL [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.005 sec)
+
+MySQL [(none)]> CREATE DATABASE udacity;
+Query OK, 1 row affected (0.015 sec)
+
+MySQL [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
+| udacity            |
++--------------------+
+5 rows in set (0.001 sec)
+
+MySQL [(none)]> USE udacity
+Database changed
+MySQL [udacity]> CREATE TABLE studen(name VARCHAR(20), sex CHAR(1), birth DATE);
+Query OK, 0 rows affected (0.066 sec)
+
+MySQL [udacity]> SHOW table
+    ->
+    -> Ctrl-C -- exit!
+Aborted
+[ec2-user@ip-10-1-11-223 ~]$ mysql -h udacity-primary-db.cgoarrai2ute.us-east-1.rds.amazonaws.com -P 3306 -u admin -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 26
+Server version: 8.0.32 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> SHOW TABLES;
+ERROR 1046 (3D000): No database selected
+MySQL [(none)]> USE udacity;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [udacity]> SHOW TABLES;
++-------------------+
+| Tables_in_udacity |
++-------------------+
+| studen            |
++-------------------+
+1 row in set (0.001 sec)
+
+MySQL [udacity]> INSERT into studen (
+    ->     -> name, sex, birth)
+    ->     -> VALUES
+    ->     -> (ToanLa, 1, '2023-03-03' );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> name, sex, birth)
+    -> VALUES
+    -> (ToanLa, 1, '2023-03-03' )' at line 2
+MySQL [udacity]> INSERT into studen (name, sex, birth) VALUES (ToanLa, 1, '2023-03-03' );
+ERROR 1054 (42S22): Unknown column 'ToanLa' in 'field list'
+MySQL [udacity]> DESCRIBE udacity;
+ERROR 1146 (42S02): Table 'udacity.udacity' doesn't exist
+MySQL [udacity]> DESCRIBE studen
+    -> ;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | YES  |     | NULL    |       |
+| sex   | char(1)     | YES  |     | NULL    |       |
+| birth | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.003 sec)
+
+MySQL [udacity]> INSERT into studen (name, sex, birth) VALUES ('ToanLa', 'm', '2023-03-03' );
+Query OK, 1 row affected (0.009 sec)
+
+MySQL [udacity]> SELECT * from studen;
++--------+------+------------+
+| name   | sex  | birth      |
++--------+------+------------+
+| ToanLa | m    | 2023-03-03 |
++--------+------+------------+
+1 row in set (0.001 sec)
+
+MySQL [udacity]>
